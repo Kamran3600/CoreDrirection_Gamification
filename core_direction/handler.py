@@ -1,9 +1,8 @@
 from django_rq import job
-from services_participants import update_mongo_participants
+from .services_participants import update_mongo_participants
 from .models import GamificationChallenge, UserGamificationChallenge, GamificationCorePointRecord
 from django.utils import timezone
 from django.db.models import Sum
-
 
 
 @job('gamification_challenges')
