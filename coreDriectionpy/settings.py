@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core_direction',
-    'django_rq'
+    'django_rq',
+    'django_crontab',
 
 ]
 
@@ -71,6 +72,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'coreDriectionpy.wsgi.application'
 
+
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -85,19 +88,12 @@ DATABASES = {
     },
 }
 
-
 RQ_QUEUES = {
-    'default': {
-        'HOST': 'localhost',
-        'PORT': 6379,
-        'DB': 0,
-        'DEFAULT_TIMEOUT': 360,
-    },
     'gamification_challenges': {
         'HOST': 'localhost',
         'PORT': 6379,
-        'DB': 0,
-        'DEFAULT_TIMEOUT': 360,
+        'DB': 1,  # Adjust the DB number as needed
+        'ASYNC': True,
     },
     # Add more queues if needed
 }
@@ -141,3 +137,24 @@ STATIC_ROOT = os.path.join(BASE_DIR, "core_direction/static")
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'app.log',  # Set your desired log file name
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+CRONJOBS = [
+    ('*/1 * * * *', 'core_direction.cron.cronjob')
+]

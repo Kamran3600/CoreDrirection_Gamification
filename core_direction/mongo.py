@@ -14,14 +14,15 @@ class ChallengeParticipant(Document):
     email = StringField()
     gender = StringField()
     privacy = StringField()
-    total_core_points = IntField()
+    totalCorePoints = IntField()
     stepCounts = IntField()
     checkins = IntField()
-    heartRate = IntField()
+    heart_rate = IntField()
     totalActivityLogToday = IntField()
     rank = IntField()
     numberOfParticipant = IntField()
-    challengeId = IntField()
+    challengeID = IntField()
+    challengeSlug = StringField()
     meta = {
         'collection': 'challengeparticipantschemas'
     }

@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from .models import FosUserUser, GamificationChallenge
 from django.core.paginator import Paginator
+from django.shortcuts import render
 from django.utils import timezone
 from .handler import process_relevant_challenges
+from .models import FosUserUser, GamificationChallenge
 
 
 def fos_user_user(request):
